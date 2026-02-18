@@ -1,0 +1,18 @@
+[
+  {
+    "id": "ex_pushup",
+    "name": "Flexiones",
+    "muscle_group": "Pecho",
+    "equipment": "Peso corporal",
+    "image_uri": "assets://exercises/fixed/pushup.png",
+    "is_custom": 0
+  },
+  {
+    "id": "ex_bench_press",
+    "name": "Press banca con barra",
+    "muscle_group": "Pecho",
+    "equipment": "Barra",
+    "image_uri": "assets://exercises/fixed/bench_press.png",
+    "is_custom": 0
+  }
+]
