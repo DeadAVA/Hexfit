@@ -22,6 +22,7 @@ export interface Exercise {
   equipment: string;
   image_uri: string;
   is_custom: number; // 0=fijo, 1=custom
+  description?: string; // Descripción del ejercicio
   created_at: string;
   updated_at: string;
 }

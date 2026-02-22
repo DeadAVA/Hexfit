@@ -66,6 +66,7 @@ export class DatabaseSync {
           equipment TEXT NOT NULL,
           image_uri TEXT NOT NULL,
           is_custom INTEGER NOT NULL DEFAULT 0,
+          description TEXT,
           created_at TEXT NOT NULL,
           updated_at TEXT NOT NULL
         );
@@ -162,24 +163,48 @@ export class DatabaseSync {
 
   private seedExercises() {
     try {
-      const existing = this.db.getFirstSync<{ count: number }>(
-        "SELECT COUNT(*) as count FROM exercises WHERE is_custom = 0;"
-      );
-      if (!existing || existing.count === 0) {
-        const now = getCurrentTimestamp();
-        for (const exercise of EXERCISE_CATALOG) {
+      const now = getCurrentTimestamp();
+      // Actualizar o insertar ejercicios predefinidos
+      for (const exercise of EXERCISE_CATALOG) {
+        // Verificar si existe
+        const existing = this.db.getFirstSync<{ id: string; created_at: string }>(
+          "SELECT id, created_at FROM exercises WHERE id = ?;",
+          [exercise.id]
+        );
+        
+        if (existing) {
+          // Actualizar ejercicio existente (mantener created_at original)
+          this.db.runSync(
+            `
+            UPDATE exercises 
+            SET name = ?, muscle_group = ?, equipment = ?, image_uri = ?, description = ?, updated_at = ?
+            WHERE id = ? AND is_custom = 0;
+          `,
+            [
+              exercise.name,
+              exercise.muscle_group,
+              exercise.equipment,
+              exercise.image_url,
+              exercise.description || null,
+              now,
+              exercise.id,
+            ]
+          );
+        } else {
+          // Insertar nuevo ejercicio
           this.db.runSync(
             `
             INSERT INTO exercises 
-            (id, name, muscle_group, equipment, image_uri, is_custom, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?, 0, ?, ?);
+            (id, name, muscle_group, equipment, image_uri, is_custom, description, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, 0, ?, ?, ?);
           `,
             [
               exercise.id,
               exercise.name,
               exercise.muscle_group,
               exercise.equipment,
-              exercise.image_url, // OJO: en DB se llama image_uri
+              exercise.image_url,
+              exercise.description || null,
               now,
               now,
             ]

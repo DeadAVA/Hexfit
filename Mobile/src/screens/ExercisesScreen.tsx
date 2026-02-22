@@ -33,6 +33,8 @@ import * as Clipboard from "expo-clipboard";
 import { database } from "../db/database";
 import { Exercise } from "../shared/types";
 import { MUSCLE_GROUPS, EQUIPMENT_OPTIONS } from "../shared/constants/exercises_catalog";
+import { EXERCISE_IMAGES } from "../shared/constants/exercise_images";
+import ExerciseDetailModal from "./modals/ExerciseDetailModal";
 
 function isRealUri(uri?: string) {
   if (!uri) return false;
@@ -75,6 +77,7 @@ export default function ExercisesScreen({ navigation }: any) {
   const [selectedEquipment, setSelectedEquipment] = useState<string>("");
   const [showCustomOnly, setShowCustomOnly] = useState(false);
 
+  // Modal para crear ejercicio custom
   const [modalVisible, setModalVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -82,6 +85,10 @@ export default function ExercisesScreen({ navigation }: any) {
     equipment: "Barra",
     image_uri: "",
   });
+
+  // Modal para ver detalles del ejercicio
+  const [detailModalVisible, setDetailModalVisible] = useState(false);
+  const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
 
   const loadExercises = () => {
     try {
@@ -217,8 +224,22 @@ export default function ExercisesScreen({ navigation }: any) {
   };
 
   const ExerciseImage = ({ item }: { item: Exercise }) => {
-    const uri = getImageUri(item);
+    // Si es ejercicio predefinido (no custom), usar assets locales
+    if (item.is_custom === 0) {
+      const assetImage = EXERCISE_IMAGES[item.id];
+      if (assetImage) {
+        return (
+          <Image
+            source={assetImage}
+            style={styles.exerciseImage}
+            resizeMode="cover"
+          />
+        );
+      }
+    }
 
+    // Si es custom o no tiene asset, intentar cargar desde URI
+    const uri = getImageUri(item);
     if (!uri) {
       return (
         <View style={styles.exerciseImagePlaceholder}>
@@ -243,7 +264,14 @@ export default function ExercisesScreen({ navigation }: any) {
   };
 
   const renderExercise = ({ item }: { item: Exercise }) => (
-    <View style={styles.exerciseCard}>
+    <TouchableOpacity
+      style={styles.exerciseCard}
+      onPress={() => {
+        setSelectedExercise(item);
+        setDetailModalVisible(true);
+      }}
+      activeOpacity={0.7}
+    >
       <ExerciseImage item={item} />
 
       <View style={styles.exerciseInfo}>
@@ -257,13 +285,16 @@ export default function ExercisesScreen({ navigation }: any) {
         {item.is_custom === 1 && (
           <TouchableOpacity
             style={styles.deleteIcon}
-            onPress={() => handleDeleteCustom((item as any).id, item.name, item.image_uri)}
+            onPress={(e) => {
+              e.stopPropagation();
+              handleDeleteCustom((item as any).id, item.name, item.image_uri);
+            }}
           >
             <Ionicons name="trash" size={18} color="#ff6b6b" />
           </TouchableOpacity>
         )}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   const renderFilterChip = (label: string, isSelected: boolean, onPress: () => void) => (
@@ -476,6 +507,16 @@ export default function ExercisesScreen({ navigation }: any) {
           </ScrollView>
         </View>
       </Modal>
+
+      {/* MODAL DETALLES DEL EJERCICIO */}
+      <ExerciseDetailModal
+        visible={detailModalVisible}
+        exercise={selectedExercise}
+        onClose={() => {
+          setDetailModalVisible(false);
+          setSelectedExercise(null);
+        }}
+      />
     </View>
   );
 }

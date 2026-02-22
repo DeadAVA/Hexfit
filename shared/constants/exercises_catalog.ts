@@ -1,10 +1,7 @@
 /**
- * Catálogo de ejercicios predefinio con imágenes de ExerciseDB (API pública)
- * Las imágenes están alojadas en: https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/{id}.json
- * Las imágenes png están en: https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/{exercise_id}.png
- * 
- * IMPORTANTE: Para producción, descargar todas las imágenes localmente y cambiar image_uri a file:// paths
- * Script de descarga proporcionado en descargar_imagenes.py
+ * Catálogo de ejercicios predefinido con imágenes locales
+ * Las imágenes están en la carpeta /ejercicios en la raíz del proyecto
+ * Todas las imágenes tienen fondo blanco para mejor presentación
  */
 
 export interface ExerciseCatalogItem {
@@ -12,7 +9,7 @@ export interface ExerciseCatalogItem {
   name: string;
   muscle_group: string;
   equipment: string;
-  image_url: string; // URL pública temporal o file:// local
+  image_url: string; // Ruta local a las imágenes
   target_muscles?: string[];
 }
 
@@ -23,7 +20,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Bench Press (Barra)",
     muscle_group: "Pecho",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/barbell%20bench%20press.png",
+    image_url: "../ejercicios/Bench Press - fondo blanco.png",
     target_muscles: ["Pecho", "Tríceps", "Hombros"],
   },
   {
@@ -31,7 +28,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Incline Bench Press",
     muscle_group: "Pecho",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/barbell%20incline%20bench%20press.png",
+    image_url: "../ejercicios/Bench Press - fondo blanco.png",
     target_muscles: ["Pecho Superior", "Hombros"],
   },
   {
@@ -39,7 +36,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Dumbbell Bench Press",
     muscle_group: "Pecho",
     equipment: "Mancuernas",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dumbbell%20bench%20press.png",
+    image_url: "../ejercicios/Dumbbell_Bench_Press - fondo blanco.png",
     target_muscles: ["Pecho", "Tríceps"],
   },
   {
@@ -47,7 +44,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Push-ups",
     muscle_group: "Pecho",
     equipment: "Peso Corporal",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/push%20ups.png",
+    image_url: "../ejercicios/white_Push-ups.png",
     target_muscles: ["Pecho", "Tríceps", "Hombros"],
   },
   {
@@ -55,7 +52,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Cable Fly",
     muscle_group: "Pecho",
     equipment: "Cables",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/cable%20fly.png",
+    image_url: "../ejercicios/Cable Fly - fondo blanco.png",
     target_muscles: ["Pecho"],
   },
 
@@ -65,7 +62,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Pull-ups",
     muscle_group: "Espalda",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/pull%20ups.png",
+    image_url: "../ejercicios/white_Pull-ups.png",
     target_muscles: ["Espalda Dorsal", "Bíceps"],
   },
   {
@@ -73,7 +70,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Lat Pulldown",
     muscle_group: "Espalda",
     equipment: "Máquina",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/lat%20pulldown.png",
+    image_url: "../ejercicios/Lat_Pulldown.png",
     target_muscles: ["Espalda Dorsal", "Bíceps"],
   },
   {
@@ -81,7 +78,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Barbell Row",
     muscle_group: "Espalda",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/barbell%20row.png",
+    image_url: "../ejercicios/Barbell Row - fondo blanco.png",
     target_muscles: ["Espalda", "Bíceps"],
   },
   {
@@ -89,7 +86,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Dumbbell Row",
     muscle_group: "Espalda",
     equipment: "Mancuernas",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dumbbell%20row.png",
+    image_url: "../ejercicios/Dumbbell_Row - fondo blanco.png",
     target_muscles: ["Espalda", "Bíceps"],
   },
   {
@@ -97,7 +94,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Face Pull",
     muscle_group: "Espalda",
     equipment: "Cables",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/face%20pull.png",
+    image_url: "../ejercicios/Face_Pull - fondo blanco.png",
     target_muscles: ["Espalda Posterior", "Hombros"],
   },
 
@@ -107,7 +104,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Overhead Press",
     muscle_group: "Hombros",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/barbell%20shoulder%20press.png",
+    image_url: "../ejercicios/Overhead_Press_white_background.png",
     target_muscles: ["Hombros", "Tríceps"],
   },
   {
@@ -115,7 +112,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Dumbbell Shoulder Press",
     muscle_group: "Hombros",
     equipment: "Mancuernas",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dumbbell%20shoulder%20press.png",
+    image_url: "../ejercicios/Dumbbell_Shoulder_Press - fondo blanco.png",
     target_muscles: ["Hombros", "Tríceps"],
   },
   {
@@ -123,7 +120,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Lateral Raise",
     muscle_group: "Hombros",
     equipment: "Mancuernas",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dumbbell%20lateral%20raise.png",
+    image_url: "../ejercicios/frontheben-kurzhanteln-800x448 - fondo blanco.png",
     target_muscles: ["Hombros Laterales"],
   },
   {
@@ -131,7 +128,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Front Raise",
     muscle_group: "Hombros",
     equipment: "Mancuernas",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dumbbell%20front%20raise.png",
+    image_url: "../ejercicios/Front_Raise - fondo blanco.png",
     target_muscles: ["Hombros Anteriores"],
   },
   {
@@ -139,7 +136,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Reverse Fly",
     muscle_group: "Hombros",
     equipment: "Mancuernas",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dumbbell%20reverse%20fly.png",
+    image_url: "../ejercicios/white_Reverse_Fly.png",
     target_muscles: ["Espalda Posterior", "Hombros"],
   },
 
@@ -149,7 +146,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Barbell Curl",
     muscle_group: "Brazos",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/barbell%20curl.png",
+    image_url: "../ejercicios/Barbell Curl - fondo blanco.png",
     target_muscles: ["Bíceps"],
   },
   {
@@ -157,7 +154,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Dumbbell Curl",
     muscle_group: "Brazos",
     equipment: "Mancuernas",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dumbbell%20curl.png",
+    image_url: "../ejercicios/Barbell Curl - fondo blanco.png",
     target_muscles: ["Bíceps"],
   },
   {
@@ -165,7 +162,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Hammer Curl",
     muscle_group: "Brazos",
     equipment: "Mancuernas",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dumbbell%20hammer%20curl.png",
+    image_url: "../ejercicios/Hammer_Curl - fondo blanco.png",
     target_muscles: ["Bíceps"],
   },
   {
@@ -173,7 +170,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Cable Curl",
     muscle_group: "Brazos",
     equipment: "Cables",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/cable%20curl.png",
+    image_url: "../ejercicios/Cable Curl - fondo blanco.png",
     target_muscles: ["Bíceps"],
   },
 
@@ -183,7 +180,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Close Grip Bench Press",
     muscle_group: "Brazos",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/barbell%20close%20grip%20bench%20press.png",
+    image_url: "../ejercicios/Close_Grip_Bench_Press - fondo blanco.png",
     target_muscles: ["Tríceps", "Pecho"],
   },
   {
@@ -191,7 +188,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Tricep Dips",
     muscle_group: "Brazos",
     equipment: "Peso Corporal",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dips.png",
+    image_url: "../ejercicios/white_Tricep_Dips.png",
     target_muscles: ["Tríceps"],
   },
   {
@@ -199,7 +196,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Tricep Pushdown",
     muscle_group: "Brazos",
     equipment: "Cables",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/cable%20tricep%20pushdown.png",
+    image_url: "../ejercicios/white_Tricep_Pushdown.png",
     target_muscles: ["Tríceps"],
   },
   {
@@ -207,7 +204,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Dumbbell Tricep Extension",
     muscle_group: "Brazos",
     equipment: "Mancuernas",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dumbbell%20tricep%20extension.png",
+    image_url: "../ejercicios/Dumbbell_Tricep_Extension - fondo blanco.png",
     target_muscles: ["Tríceps"],
   },
 
@@ -217,7 +214,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Barbell Squat",
     muscle_group: "Piernas",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/barbell%20squat.png",
+    image_url: "../ejercicios/Barbell Squat - fondo blanco.png",
     target_muscles: ["Cuádriceps", "Glúteos"],
   },
   {
@@ -225,7 +222,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Leg Press",
     muscle_group: "Piernas",
     equipment: "Máquina",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/leg%20press.png",
+    image_url: "../ejercicios/Leg_Press_white_background.png",
     target_muscles: ["Cuádriceps", "Glúteos"],
   },
   {
@@ -233,7 +230,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Leg Extension",
     muscle_group: "Piernas",
     equipment: "Máquina",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/leg%20extension.png",
+    image_url: "../ejercicios/white_Leg_Extension.png",
     target_muscles: ["Cuádriceps"],
   },
   {
@@ -241,7 +238,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Goblet Squat",
     muscle_group: "Piernas",
     equipment: "Mancuernas",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dumbbell%20goblet%20squat.png",
+    image_url: "../ejercicios/Goblet_Squat - fondo blanco.png",
     target_muscles: ["Cuádriceps", "Glúteos"],
   },
   {
@@ -249,7 +246,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Smith Machine Squat",
     muscle_group: "Piernas",
     equipment: "Smith Machine",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/smith%20machine%20squat.png",
+    image_url: "../ejercicios/Smith_Machine_Squat_white_background.png",
     target_muscles: ["Cuádriceps"],
   },
 
@@ -259,7 +256,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Leg Curl",
     muscle_group: "Piernas",
     equipment: "Máquina",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/leg%20curl.png",
+    image_url: "../ejercicios/white_Leg_Curl.png",
     target_muscles: ["Isquiotibiales"],
   },
   {
@@ -267,7 +264,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Barbell Deadlift",
     muscle_group: "Piernas",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/barbell%20deadlift.png",
+    image_url: "../ejercicios/Barbell Deadlift - fondo blanco.png",
     target_muscles: ["Isquiotibiales", "Espalda", "Glúteos"],
   },
   {
@@ -275,7 +272,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Romanian Deadlift",
     muscle_group: "Piernas",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/barbell%20romanian%20deadlift.png",
+    image_url: "../ejercicios/white_Romanian_Deadlift.png",
     target_muscles: ["Isquiotibiales", "Glúteos"],
   },
   {
@@ -283,7 +280,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Dumbbell Deadlift",
     muscle_group: "Piernas",
     equipment: "Mancuernas",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/dumbbell%20deadlift.png",
+    image_url: "../ejercicios/Dumbbell_Deadlift - fondo blanco.png",
     target_muscles: ["Isquiotibiales", "Espalda"],
   },
 
@@ -293,7 +290,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Hip Thrust",
     muscle_group: "Glúteos",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/barbell%20hip%20thrust.png",
+    image_url: "../ejercicios/Hip_Thrust_white_background.png",
     target_muscles: ["Glúteos"],
   },
   {
@@ -301,7 +298,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Hack Squat",
     muscle_group: "Glúteos",
     equipment: "Smith Machine",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/hack%20squat.png",
+    image_url: "../ejercicios/Hack_Squat - fondo blanco.png",
     target_muscles: ["Glúteos", "Cuádriceps"],
   },
   {
@@ -309,7 +306,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Bulgarian Split Squat",
     muscle_group: "Glúteos",
     equipment: "Peso Corporal",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/bulgarian%20split%20squat.png",
+    image_url: "../ejercicios/Bulgarian Split Squat - fondo blanco.png",
     target_muscles: ["Glúteos", "Cuádriceps"],
   },
 
@@ -319,7 +316,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Barbell Crunch",
     muscle_group: "Core",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/barbell%20crunch.png",
+    image_url: "../ejercicios/Barbell Crunch - fondo blanco.png",
     target_muscles: ["Abdominales"],
   },
   {
@@ -327,7 +324,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Crunch",
     muscle_group: "Core",
     equipment: "Máquina",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/machine%20crunch.png",
+    image_url: "../ejercicios/Crunch - fondo blanco.png",
     target_muscles: ["Abdominales"],
   },
   {
@@ -335,7 +332,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Decline Sit-ups",
     muscle_group: "Core",
     equipment: "Peso Corporal",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/decline%20sit-ups.png",
+    image_url: "../ejercicios/Decline_Sit-ups - fondo blanco.png",
     target_muscles: ["Abdominales"],
   },
   {
@@ -343,7 +340,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Cable Crunch",
     muscle_group: "Core",
     equipment: "Cables",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/cable%20crunch.png",
+    image_url: "../ejercicios/Cable Crunch - fondo blanco.png",
     target_muscles: ["Abdominales"],
   },
   {
@@ -351,7 +348,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Hanging Leg Raise",
     muscle_group: "Core",
     equipment: "Barra",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/hanging%20leg%20raise.png",
+    image_url: "../ejercicios/Hanging_Leg_Raise.png",
     target_muscles: ["Abdominales"],
   },
   {
@@ -359,7 +356,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Plank",
     muscle_group: "Core",
     equipment: "Peso Corporal",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/plank.png",
+    image_url: "../ejercicios/Plank.png",
     target_muscles: ["Core"],
   },
 
@@ -369,7 +366,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Running (Treadmill)",
     muscle_group: "Cardio",
     equipment: "Máquina",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/running%20(treadmill).png",
+    image_url: "../ejercicios/Running_Treadmill.png",
     target_muscles: ["Piernas", "Cardiovascular"],
   },
   {
@@ -377,7 +374,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Stationary Bike",
     muscle_group: "Cardio",
     equipment: "Máquina",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/stationary%20bike.png",
+    image_url: "../ejercicios/Stationary_Bike.png",
     target_muscles: ["Piernas", "Cardiovascular"],
   },
   {
@@ -385,7 +382,7 @@ export const EXERCISE_CATALOG: ExerciseCatalogItem[] = [
     name: "Jumping Jacks",
     muscle_group: "Cardio",
     equipment: "Peso Corporal",
-    image_url: "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/jumping%20jacks.png",
+    image_url: "../ejercicios/Jumping_Jacks.png",
     target_muscles: ["Cuerpo Completo"],
   },
 ];

@@ -17,8 +17,18 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { database } from "../db/database";
 import { Exercise, DayItemWithExercise } from "../shared/types";
+import { EXERCISE_IMAGES } from "../shared/constants/exercise_images";
+import ExerciseDetailModal from "./modals/ExerciseDetailModal";
 
 const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n));
+
+// Helper para obtener la fuente de imagen correcta
+function getImageSource(exercise: Exercise) {
+  if (exercise.is_custom === 0 && EXERCISE_IMAGES[exercise.id]) {
+    return EXERCISE_IMAGES[exercise.id];
+  }
+  return { uri: exercise.image_uri };
+}
 
 export default function ProgramDayEditorScreen({ route, navigation }: any) {
   const { programDayId, dayLabel } = route.params;
@@ -37,6 +47,10 @@ export default function ProgramDayEditorScreen({ route, navigation }: any) {
     rest_seconds: "60",
     notes: "",
   });
+
+  // Estados para el modal de detalles del ejercicio
+  const [detailModalVisible, setDetailModalVisible] = useState(false);
+  const [selectedExerciseForDetail, setSelectedExerciseForDetail] = useState<Exercise | null>(null);
 
   useEffect(() => {
     loadDayItems();
@@ -153,7 +167,7 @@ export default function ProgramDayEditorScreen({ route, navigation }: any) {
 
     return (
       <View style={styles.itemCard}>
-        <Image source={{ uri: item.exercise.image_uri }} style={styles.itemImage} resizeMode="cover" />
+        <Image source={getImageSource(item.exercise)} style={styles.itemImage} resizeMode="cover" />
         <View style={styles.itemContent}>
           <Text style={styles.itemName}>{item.exercise.name}</Text>
           <Text style={styles.itemConfig}>
@@ -176,19 +190,32 @@ export default function ProgramDayEditorScreen({ route, navigation }: any) {
   const renderExerciseOption = ({ item }: { item: Exercise }) => {
     const isSelected = selectedExercises.has(item.id);
     return (
-      <TouchableOpacity
-        style={[styles.exerciseOption, isSelected && styles.exerciseOptionSelected]}
-        onPress={() => toggleExerciseSelection(item.id)}
-      >
-        <Image source={{ uri: item.image_uri }} style={styles.exerciseOptionImage} resizeMode="cover" />
-        <View style={styles.exerciseOptionInfo}>
-          <Text style={styles.exerciseOptionName}>{item.name}</Text>
-          <Text style={styles.exerciseOptionDetails}>
-            {item.muscle_group} • {item.equipment}
-          </Text>
-        </View>
-        {isSelected ? <Ionicons name="checkmark-circle" size={24} color="#00d4ff" /> : null}
-      </TouchableOpacity>
+      <View style={styles.exerciseOptionWrapper}>
+        <TouchableOpacity
+          style={[styles.exerciseOption, isSelected && styles.exerciseOptionSelected]}
+          onPress={() => toggleExerciseSelection(item.id)}
+        >
+          <Image source={getImageSource(item)} style={styles.exerciseOptionImage} resizeMode="cover" />
+          <View style={styles.exerciseOptionInfo}>
+            <Text style={styles.exerciseOptionName}>{item.name}</Text>
+            <Text style={styles.exerciseOptionDetails}>
+              {item.muscle_group} • {item.equipment}
+            </Text>
+          </View>
+          {isSelected ? <Ionicons name="checkmark-circle" size={24} color="#00d4ff" /> : null}
+        </TouchableOpacity>
+        
+        {/* Botón de información */}
+        <TouchableOpacity
+          style={styles.infoButton}
+          onPress={() => {
+            setSelectedExerciseForDetail(item);
+            setDetailModalVisible(true);
+          }}
+        >
+          <Ionicons name="information-circle-outline" size={22} color="#00d4ff" />
+        </TouchableOpacity>
+      </View>
     );
   };
 
@@ -301,6 +328,16 @@ export default function ProgramDayEditorScreen({ route, navigation }: any) {
           </View>
         </View>
       </Modal>
+
+      {/* MODAL DETALLES DEL EJERCICIO */}
+      <ExerciseDetailModal
+        visible={detailModalVisible}
+        exercise={selectedExerciseForDetail}
+        onClose={() => {
+          setDetailModalVisible(false);
+          setSelectedExerciseForDetail(null);
+        }}
+      />
     </View>
   );
 }
@@ -354,6 +391,10 @@ const styles = StyleSheet.create({
   modalSave: { color: "#00d4ff", fontSize: 16, fontWeight: "600" },
 
   exercisesListContent: { padding: 12 },
+  exerciseOptionWrapper: {
+    position: "relative",
+    marginBottom: 8,
+  },
   exerciseOption: {
     flexDirection: "row",
     alignItems: "center",
@@ -361,7 +402,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     borderColor: "#333",
-    marginBottom: 8,
     overflow: "hidden",
   },
   exerciseOptionSelected: { borderColor: "#00d4ff", backgroundColor: "#1a2a2a" },
@@ -369,6 +409,15 @@ const styles = StyleSheet.create({
   exerciseOptionInfo: { flex: 1, padding: 12 },
   exerciseOptionName: { color: "#fff", fontSize: 14, fontWeight: "600", marginBottom: 4 },
   exerciseOptionDetails: { color: "#999", fontSize: 12 },
+  infoButton: {
+    position: "absolute",
+    top: 8,
+    right: 8,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    borderRadius: 16,
+    padding: 4,
+    zIndex: 1,
+  },
 
   configModalOverlay: { flex: 1, backgroundColor: "rgba(0, 0, 0, 0.9)", justifyContent: "center", padding: 20 },
   configModal: { backgroundColor: "#1a1a1a", borderRadius: 12, padding: 20, maxHeight: "80%" },
